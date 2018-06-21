@@ -13,3 +13,13 @@ function addBinary(a,b) {
   
   return binaryDigits.reverse().join('');
 }
+
+/*
+// Best solution, the Number.prototype.toString() function takes as an optional 
+// argument an integer between 2 and 36 that determines the base of the number when 
+// converting to a string. 2 will be binary. 16 will be hexadecimal.
+*/
+
+// function addBinary(a,b){
+//   return (a+b).toString(2)
+// }
