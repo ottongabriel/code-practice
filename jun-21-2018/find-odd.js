@@ -1,3 +1,8 @@
+
+/*
+// finds the element within an aray that is repeated an odd number of times within it.
+// It is assumed that there is one number is repeated an odd number of times within the array.
+*/
 function findOdd(A) {
   //happy coding!
   for(let i = 0; i < A.length; i++){
