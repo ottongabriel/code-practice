@@ -1,5 +1,5 @@
 /*
-// Recieves an integer (assumes). Returns a string in the form of:
+// Recieves an integer (assumed). Returns a string in the form of:
 // input -> 70304
 // outpu -> '70000 + 300 + 4'
 */
