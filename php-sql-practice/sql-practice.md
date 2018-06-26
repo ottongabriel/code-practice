@@ -118,3 +118,10 @@ SELECT * FROM customers
 WHERE country IN ('Mexico', 'Argentina', 'Brazil');
 #((this can be very helpful in reducing the number of queries))
 
+
+
+###FOREIGN KEYS ALLOWS US TO IDENTIFY RECORDS THAT OTHER RECORDS DEPEND ON FOR COMPLETION. 
+
+
+
+###
