@@ -120,8 +120,101 @@ WHERE country IN ('Mexico', 'Argentina', 'Brazil');
 
 
 
-###FOREIGN KEYS ALLOWS US TO IDENTIFY RECORDS THAT OTHER RECORDS DEPEND ON FOR COMPLETION. 
+###FOREIGN KEYS ALLOWS US TO IDENTIFY RECORDS THAT OTHER RECORDS DEPEND ON FOR COMPLETION. IT PREVENTS YOU FROM DELETING RECORD ACCIDENTALLY AND CREATING CURRUPTED DATA.
 
 
 
-###
+###THE JOINS SECTION!!!
+##FULL EXPLANATION WITH PICTURES
+#https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins
+
+#types: INNER, LEFT, RIGHT, FULL
+
+#Joins are done with data that would mean nothing on it's own, but would make other documents unnecessarily long
+
+##INNER JOIN:
+SELECT customers.ContactName, customers.Address, orders.OrderDate, customers.country
+FROM customers
+INNER JOIN orders
+ON customers.CustomerID  = orders.CustomerID
+ORDER BY customers.ContactName
+#This query will return all of the records in the left table (table A) that have a matching record in the right table (table B)
+
+##LEFT JOIN:
+SELECT customers.ContactName, customers.Address, orders.OrderDate, customers.country
+FROM customers
+LEFT JOIN orders
+ON customers.CustomerID  = orders.CustomerID
+ORDER BY customers.ContactName
+#This query will return all of the records in the left table (table A) regardless if any of those records have a match in the right table (table B). It will also return any matching records from the right table.
+
+##RIGHT JOIN
+SELECT orders.OrderDate, customers.ContactName, customers.Address
+FROM orders
+RIGHT JOIN customers
+ON orders.CustomerID = customers.CustomerID
+ORDER BY orders.OrderDate
+#This query will return all of the records in the right table (table B) regardless if any of those records have a match in the left table (table A). It will also return any matching records from the left table.
+SELECT orders.OrderID, customers.ContactName, customers.City, products.productname
+FROM orders
+  INNER JOIN products
+    ON orderdetails.productid = products.productid
+  INNER JOIN orderdetails
+    ON orders.orderid = orderdetails.orderid
+  INNER JOIN customers
+    ON orders.CustomerID = customers.CustomerID
+ORDER BY orders.orderid
+
+
+
+###ALIASES
+
+##Simple aliases
+SELECT customers.ContactName AS 'Name', customers.Address AS 'Addr.'
+FROM customers
+
+##Combined aliases
+SELECT customers.ContactName, CONCAT(customers.Address, ' ', customers.city, ' ', customers.state) AS 'Full Address'
+FROM customers
+
+##Table aliases
+SELECT o.orderid, o.OrderDate, c.ContactName, c.city
+FROM customers AS c, orders AS o
+
+
+###AGGREGATE FUNCTIONS
+
+##Average
+SELECT AVG(price) AS 'Average Price' FROM products
+
+##Count
+SELECT COUNT(productname) AS 'Product Count' FROM products
+
+##maximum
+SELECT products.productname AS 'Most Expensive Product', MAX(price) AS 'Highest Price' FROM products
+
+##Minimum
+SELECT products.productname AS 'Cheapest Product', MIN(price) AS 'Lowest Price' FROM products
+
+##Sum
+##Group BY
+SELECT orders.OrderID, customers.ContactName, SUM(products.price) AS 'Order Total'
+FROM orders
+  INNER JOIN products
+    ON orderdetails.productid = products.productid
+  INNER JOIN orderdetails
+    ON orders.orderid = orderdetails.orderid
+  INNER JOIN customers
+    ON orders.CustomerID = customers.CustomerID
+WHERE Customers.CustomerID = 2
+GROUP BY orders.OrderID
+ORDER BY orders.orderid
+#The group by in this query is extremely important, otherwise the sum off all orders is calculated instead
+
+##Having
+SELECT City, COUNT(City) AS 'Number of Customers'
+FROM customers
+GROUP BY City
+HAVING COUNT(City) > 2
+#The GROUP BY is mandatory when using HAVING
+
