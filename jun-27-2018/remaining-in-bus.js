@@ -10,3 +10,7 @@
 var number = function(busStops) {
   return busStops.reduce((total, inOut) => total + inOut[0] - inOut[1], 0);
 };
+
+// BEST SOLUTION:
+// const number = (busStops) => busStops.reduce((rem, [on, off]) => rem + on - off, 0);
+// NOTICE WHAT YOU CAN DO WHEN YOU KNOW EXACTLY HOW EACH OF THE INNER ARRAYS ARE FORMATED. MUCH MORE READABLE.
