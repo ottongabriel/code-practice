@@ -1,8 +1,13 @@
 function printerError(s) {
   // your code
-  let errorCount = s.split('').reduce((errors,character) => /[n-z]/.test(character) ? ++errors : errors + 0 , 0)
-  
-  return `${errorCount}/${s.length}`
+  let errorCount = s
+    .split("")
+    .reduce(
+      (errors, character) => (/[n-z]/.test(character) ? ++errors : errors + 0),
+      0
+    );
+
+  return `${errorCount}/${s.length}`;
 }
 
 // Testing code:
@@ -22,10 +27,8 @@ function printerError(s) {
 
 // LESSON LEARNED: ++errors (as opposed to errors++) IS NECESSARY IN THIS CASE BECAUSE IT NEEDS TO BE EVALUATED BEFORE RETURNING.
 
-
-
 // BEST SOLUTION :
 
-// function printerError(s) {
-//   return s.match(/[^a-m]/g).length + "/" + s.length;
-// }
+function printerError(s) {
+  return s.match(/[^a-m]/g).length + "/" + s.length;
+}
