@@ -39,3 +39,15 @@ const flattenArray = theArr =>
   );
 
 flattenArray(multiDArray);
+
+// added Jul 13 2018:
+
+Array.prototype.flattenArray = function() {
+  return this.reduce(
+    (acc, curr) =>
+      Array.isArray(curr)
+        ? acc.concat(...curr.flattenArray())
+        : acc.concat(curr),
+    []
+  );
+};
