@@ -31,13 +31,9 @@
  *   }
  * ]
  *
- * OUTPUT: [1,1,2,3,4,4,5,6]
+ * OUTPUT: [[1,4,5],[1,3,4],[2,6]]
  */
 Object.prototype.flattenLinkedList = function() {
-  let arr = [];
   const { next, val } = this;
-  if (next !== null) {
-    arr = arr.concat(next.flattenLinkedList());
-  }
-  return arr.concat(val);
+  return next !== null ? [val, next.flattenLinkedList()] : [val];
 };

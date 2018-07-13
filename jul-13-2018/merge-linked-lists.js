@@ -14,20 +14,14 @@ let mergeKLists = function(lists) {
     ? null
     : lists
         .filter(node => node !== null)
-        .map(node => {
-          return node.flattenLinkedList();
-        })
+        .map(node => node.flattenLinkedList())
         .flattenArray()
         .sort((a, b) => a - b);
 };
 
 Object.prototype.flattenLinkedList = function() {
-  let arr = [];
   const { next, val } = this;
-  if (next !== null) {
-    arr = arr.concat(next.flattenLinkedList());
-  }
-  return arr.concat(val);
+  return next !== null ? [val, next.flattenLinkedList()] : [val];
 };
 Array.prototype.flattenArray = function() {
   return this.reduce(
